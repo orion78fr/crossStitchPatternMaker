@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 public class MainWindow extends JFrame {
   public static MainWindow INSTANCE;
   private ImageComponent imageComponent = new ImageComponent();
+  private BufferedImage original = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_BINARY);
   private BufferedImage currentImage = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_BINARY);
 
   private MainWindow() {
@@ -26,12 +27,18 @@ public class MainWindow extends JFrame {
   }
 
   public void setImage(BufferedImage img) {
+    original = img;
     currentImage = img;
     imageComponent.setImage(img);
   }
 
   public BufferedImage getCurrentImage() {
     return currentImage;
+  }
+
+  public void setSquareSize(int squareSize) {
+    currentImage = ImageOP.toSquares(original, squareSize);
+    imageComponent.setImage(currentImage);
   }
 
   public static void main(String[] args) {

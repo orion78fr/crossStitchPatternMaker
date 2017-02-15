@@ -46,6 +46,25 @@ public class MenuFactory {
       }),
       new Pair<>("Exit", (event) -> System.exit(0))
     ));
+
+    menus.put("Operations", Arrays.asList(
+      new Pair<>("Set square size", (event) -> {
+        String value = JOptionPane.showInputDialog(MainWindow.INSTANCE, "Choose a square size");
+        if (value.trim().isEmpty()) {
+          JOptionPane.showMessageDialog(MainWindow.INSTANCE, "You must enter a number");
+          return;
+        }
+        int intVal;
+        try {
+          intVal = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+          JOptionPane.showMessageDialog(MainWindow.INSTANCE, "Invalid number");
+          return;
+        }
+
+        MainWindow.INSTANCE.setSquareSize(intVal);
+      })
+    ));
   }
 
   public static JMenuBar create() {
