@@ -41,6 +41,15 @@ public class MainWindow extends JFrame {
     imageComponent.setImage(currentImage);
   }
 
+  public void toGreyScale(){
+    currentImage = ImageOP.toGreyScale(currentImage);
+    imageComponent.setImage(currentImage);
+  }
+
+  public void setNumberOfGreyscale(int nbGS) {
+    // TODO
+  }
+
   public static void main(String[] args) {
     INSTANCE = new MainWindow();
     INSTANCE.setVisible(true);

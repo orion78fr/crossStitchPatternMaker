@@ -52,4 +52,21 @@ public class ImageOP {
     b /= colors.length;
     return new Color((int) r, (int) g, (int) b);
   }
+
+  public static BufferedImage toGreyScale(BufferedImage original) {
+    int sizex = original.getWidth();
+    int sizey = original.getHeight();
+    BufferedImage newImg = new BufferedImage(sizex, sizey, original.getType());
+
+    for (int i = 0; i < sizex; i++) {
+      for (int j = 0; j < sizey; j++) {
+        Color originalColor = new Color(original.getRGB(i, j));
+        int gs = originalColor.getRed() + originalColor.getGreen() + originalColor.getBlue();
+        gs /= 3;
+        newImg.setRGB(i, j, new Color(gs, gs, gs).getRGB());
+      }
+    }
+
+    return newImg;
+  }
 }

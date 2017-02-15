@@ -63,6 +63,23 @@ public class MenuFactory {
         }
 
         MainWindow.INSTANCE.setSquareSize(intVal);
+      }),
+      new Pair<>("To greyscale", (event) -> MainWindow.INSTANCE.toGreyScale()),
+      new Pair<>("Set number of grayscale", (event) -> {
+        String value = JOptionPane.showInputDialog(MainWindow.INSTANCE, "Choose number of greyscale");
+        if (value.trim().isEmpty()) {
+          JOptionPane.showMessageDialog(MainWindow.INSTANCE, "You must enter a number");
+          return;
+        }
+        int intVal;
+        try {
+          intVal = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+          JOptionPane.showMessageDialog(MainWindow.INSTANCE, "Invalid number");
+          return;
+        }
+
+        MainWindow.INSTANCE.setNumberOfGreyscale(intVal);
       })
     ));
   }
