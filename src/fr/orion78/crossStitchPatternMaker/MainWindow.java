@@ -18,7 +18,7 @@ public class MainWindow extends JFrame {
     this.setJMenuBar(MenuFactory.create());
 
     JPanel panel = new JPanel(new BorderLayout());
-    panel.add(imageComponent, BorderLayout.NORTH);
+    panel.add(imageComponent.getComponent(), BorderLayout.NORTH);
 
     JScrollPane scroll = new JScrollPane(panel);
 

@@ -1,10 +1,17 @@
 package fr.orion78.crossStitchPatternMaker;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class ImageComponent extends JLabel {
+public class ImageComponent {
+  private JLabel label = new JLabel();
+
   void setImage(BufferedImage img) {
-    this.setIcon(new ImageIcon(img));
+    label.setIcon(new ImageIcon(img));
+  }
+
+  public Component getComponent() {
+    return label;
   }
 }
