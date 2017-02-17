@@ -69,4 +69,9 @@ public class ImageOP {
 
     return newImg;
   }
+
+  public static BufferedImage withNbColor(BufferedImage currentImage, int nbColors) {
+    //TODO
+    return currentImage;
+  }
 }

@@ -9,6 +9,7 @@ public class MainWindow extends JFrame {
   private ImageComponent imageComponent = new ImageComponent();
   private BufferedImage original = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_BINARY);
   private BufferedImage currentImage = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_BINARY);
+  private Parameters params = new Parameters();
 
   private MainWindow() {
     this.setTitle("Cross Stitch Pattern Maker");
@@ -26,10 +27,24 @@ public class MainWindow extends JFrame {
     this.setSize(800, 600);
   }
 
+  private void refresh(){
+    BufferedImage currentImage = original;
+    if(params.getSquareSize() > 0){
+      currentImage = ImageOP.toSquares(currentImage, params.getSquareSize());
+    }
+    if(params.isGreyScale()){
+      currentImage = ImageOP.toGreyScale(currentImage);
+    }
+    if(params.getNbColors() > 0){
+      currentImage = ImageOP.withNbColor(currentImage, params.getNbColors());
+    }
+    imageComponent.setImage(currentImage);
+  }
+
   public void setImage(BufferedImage img) {
     original = img;
-    currentImage = img;
-    imageComponent.setImage(img);
+    params.reset();
+    refresh();
   }
 
   public BufferedImage getCurrentImage() {
@@ -37,17 +52,17 @@ public class MainWindow extends JFrame {
   }
 
   public void setSquareSize(int squareSize) {
-    currentImage = ImageOP.toSquares(original, squareSize);
-    imageComponent.setImage(currentImage);
+    params.setSquareSize(squareSize);
+    refresh();
   }
 
-  public void toGreyScale(){
-    currentImage = ImageOP.toGreyScale(currentImage);
-    imageComponent.setImage(currentImage);
+  public void switchGreyScale(){
+    params.switchGreyScale();
+    refresh();
   }
 
-  public void setNumberOfGreyscale(int nbGS) {
-    // TODO
+  public void setNumberOfColors(int nbColors) {
+    params.setNbColors(nbColors);
   }
 
   public static void main(String[] args) {
